@@ -1,0 +1,34 @@
+import SwiftUI
+
+struct Course: Identifiable {
+    var id = UUID()
+    var name: String
+    var sks: Int
+    var iconName: String
+}
+
+struct ContentView: View {
+    let courses: [Course] = [
+        Course(name: "Teknik tenaga listrik", sks: 3, iconName: "icon1"),
+        Course(name: "Komputer Aplikasi", sks: 2, iconName: "icon2"),
+        // Tambahkan mata kuliah lainnya di sini
+    ]
+
+    var body: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible(minimum: 100, maximum: .infinity))]) {
+                ForEach(courses) { course in
+                    VStack {
+                        Image(course.iconName)
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                        Text(course.name)
+                            .font(.headline)
+                        Text("SKS: \(course.sks)")
+                            .font(.subheadline)
+                    }
+                }
+            }
+        }
+    }
+}
